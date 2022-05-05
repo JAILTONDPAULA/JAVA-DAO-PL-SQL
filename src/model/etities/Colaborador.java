@@ -14,14 +14,11 @@ public class Colaborador {
 	private Sexo        sexo;
 	private Setor       setor;
 	private Colaborador gestor;
-	private Date 		registrado;
-	private String      operador;
 	
 	public Colaborador() {
 	}
 
-	public Colaborador(Float matricula, String razaoSocial, String nome, Float cpf, Date dataNascimento, Sexo sexo,
-			Setor setor, Colaborador gestor, Date registrado, String operador) {
+	public Colaborador(Float matricula, String razaoSocial, String nome, Float cpf, Date dataNascimento, Sexo sexo,Setor setor, Colaborador gestor) {
 		this.matricula = matricula;
 		this.razaoSocial = razaoSocial;
 		this.nome = nome;
@@ -30,8 +27,6 @@ public class Colaborador {
 		this.sexo = sexo;
 		this.setor = setor;
 		this.gestor = gestor;
-		this.registrado = registrado;
-		this.operador = operador;
 	}
 
 	public Float getMatricula() {
@@ -98,21 +93,6 @@ public class Colaborador {
 		this.gestor = gestor;
 	}
 
-	public Date getRegistrado() {
-		return registrado;
-	}
-
-	public void setRegistrado(Date registrado) {
-		this.registrado = registrado;
-	}
-
-	public String getOperador() {
-		return operador;
-	}
-
-	public void setOperador(String operador) {
-		this.operador = operador;
-	}
 
 	@Override
 	public int hashCode() {
@@ -135,7 +115,7 @@ public class Colaborador {
 	public String toString() {
 		return "{matricula:" + matricula + ", razaoSocial:" + razaoSocial + ", nome:" + nome + ", cpf:"
 				+ cpf + ", dataNascimento:" + dataNascimento + ", sexo:" + sexo + ", setor:" + setor + ", gestor:"
-				+ gestor + ", registrado:" + registrado + ", operador:" + operador + "}";
+				+ gestor + "}";
 	}
 	
 	

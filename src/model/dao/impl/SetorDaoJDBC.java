@@ -20,7 +20,7 @@ public class SetorDaoJDBC implements DefaultDao<Setor>{
 		ResultSet rs = null;
 		try {
 			st   = Connect.oracle().createStatement();
-			rs   = st.executeQuery("SELECT CD_SETOR,SETOR,CD_SUP_SETOR FROM EMPRESA.SETOR");
+			rs   = st.executeQuery("SELECT CD_SETOR,SETOR,CD_SUP_SETOR FROM COMPANY.SETOR");
 			List<Setor> setor = new ArrayList<>();
 			while(rs.next()) {
 				setor.add(new Setor(rs.getLong(1),rs.getString(2),findByCode(rs.getLong(3))));
@@ -39,7 +39,7 @@ public class SetorDaoJDBC implements DefaultDao<Setor>{
 	public void deleteByObject(Setor setor) {
 		PreparedStatement ps    = null;
 		try {
-			ps   = Connect.oracle().prepareStatement("DELETE EMPRESA.SETOR WHERE CD_SETOR = ? ");
+			ps   = Connect.oracle().prepareStatement("DELETE COMPANY.SETOR WHERE CD_SETOR = ? ");
 			ps.setLong(1,setor.getCodigo());
 			ps.executeUpdate();
 		}catch(SQLException e) {
@@ -56,10 +56,10 @@ public class SetorDaoJDBC implements DefaultDao<Setor>{
 		try {
 			for(Setor setores : st) {
 				ps   = Connect.oracle().prepareStatement(
-						      "INSERT INTO EMPRESA.SETOR"
+						      "INSERT INTO COMPANY.SETOR"
 						    + "(CD_SETOR,SETOR,CD_SUP_SETOR)"
 						    + "VALUES"
-						    + "(EMPRESA.SQ_SETOR.NEXTVAL,?,?)");
+						    + "(COMPANY.SQ_SETOR.NEXTVAL,?,?)");
 				ps.setString(1,setores.getSetor());
 				if(setores.getSuperior() != null) {
 					ps.setFloat(2, setores.getSuperior().getCodigo());
@@ -82,7 +82,7 @@ public class SetorDaoJDBC implements DefaultDao<Setor>{
 		ResultSet   	  rs = null;
 		try {
 			for(Setor setor : st) {
-				ps = Connect.oracle().prepareStatement("UPDATE EMPRESA.SETOR SET"
+				ps = Connect.oracle().prepareStatement("UPDATE COMPANY.SETOR SET"
 													 + "    SETOR        = UPPER(?),"
 													 + "	CD_SUP_SETOR = ?"
 													 + "WHERE"
@@ -112,7 +112,7 @@ public class SetorDaoJDBC implements DefaultDao<Setor>{
 		}
 		try {
 			st   = Connect.oracle().createStatement();
-			String query = "SELECT CD_SETOR,SETOR,CD_SUP_SETOR FROM EMPRESA.SETOR WHERE CD_SETOR = "+code;
+			String query = "SELECT CD_SETOR,SETOR,CD_SUP_SETOR FROM COMPANY.SETOR WHERE CD_SETOR = "+code;
 			rs   = st.executeQuery(query);
 			if(rs.next()) {
 				return new Setor(rs.getLong(1),rs.getString(2),findByCode(rs.getLong(3)));

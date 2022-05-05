@@ -3,7 +3,7 @@ package model.etities;
 import java.util.Objects;
 
 public class Setor {
-	private long codigo;
+	private long   codigo;
 	private String setor;
 	private Setor  superior = null;
 	

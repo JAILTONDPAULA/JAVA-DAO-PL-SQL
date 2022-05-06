@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import dataBase.Connect;
@@ -25,7 +26,7 @@ public class SetorDaoJDBC implements DefaultDao<Setor>{
 			while(rs.next()) {
 				setor.add(new Setor(rs.getLong(1),rs.getString(2),findByCode(rs.getLong(3))));
 			}
-			
+			Collections.sort(setor);
 			return setor;
 		}catch(SQLException e) {
 			throw new DataBaseException(e.getMessage());

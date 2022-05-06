@@ -20,67 +20,70 @@ public class Program {
 		char resposta;  
 		
 		///////////////////////////////////////////////////////////////////////
-		System.out.println("LISTA DE SETORES CADASTRADOS:\n");
+		System.out.println("LISTA DE SETORES CADASTRADOS:");
 		//-------------------------------------------------------------------//
 		for(Setor sts :  setores = setor.findAll()) {
 			System.out.println(sts);
 		}
 		///////////////////////////////////////////////////////////////////////
 		do {
-			System.out.println("\n DESEJA BUSCAR UM SETOR POR SEU CÓDIGO?(Y/N)");
+			System.out.print("\nDESEJA BUSCAR UM SETOR POR SEU CÓDIGO?(Y/N) ");
 			resposta = Character.toUpperCase(sc.next().charAt(0));
-			System.out.println(resposta);
 			if(resposta == 'Y'){
-				System.out.println("INFORME O CÓDIGO DO SETOR:\n");
-				sector =  setor.findByCode(1L);
-				System.out.println(sector+"\n");
+				System.out.print("INFORME O CÓDIGO DO SETOR: ");
+				Long code = sc.nextLong();
+				sector    = setor.findByCode(code);
+				System.out.println(sector);
 			}
 		}while(resposta != 'Y' && resposta != 'N');
 		
 		///////////////////////////////////////////////////////////////////////
 		do {
-			System.out.println("DESEJA CADASTRAR UM SETOR?(Y/N)");
+			System.out.print("\nDESEJA CADASTRAR UM SETOR?(Y/N) ");
 			resposta = Character.toUpperCase(sc.next().charAt(0));
 			if(resposta == 'Y'){
-				System.out.println("INFORME O NOME DO SETOR:\n");
-				sector = new Setor(0L,sc.nextLine(),null);
+				System.out.print("INFORME O NOME DO SETOR: ");
+				sc.nextLine();
+				String nome = sc.nextLine();
+				sector = new Setor(0L,nome,null);
 				
 				do {
-					System.out.println("DESEJA INFORMAR O SETOR SUPERIOR?(Y/N):");
+					System.out.print("DESEJA INFORMAR O SETOR SUPERIOR?(Y/N): ");
 					resposta = Character.toUpperCase(sc.next().charAt(0));
 			        if(resposta == 'Y') {
-						System.out.println("INFORME O CÓDIGO DO SETOR SUPERIOR:");
+						System.out.print("INFORME O CÓDIGO DO SETOR SUPERIOR: ");
 						sector.setSuperior(new Setor(sc.nextLong(),null,null));
 			        }
 				}while(resposta != 'Y' && resposta != 'N');
 				
-				setores = null;
+				setores = new ArrayList<>();
 				setores.add(sector);
 				setor.insert(setores);
+				
+				System.out.println("\nLISTA DE SETORES ATUALIZADA:");
+				//-------------------------------------------------------------------//
+				setores = setor.findAll();
+				for(Setor sts : setores) {
+					System.out.println(sts);
+				}
+
 
 			}
 		}while(resposta != 'Y' && resposta != 'N');
-		
 
-		///////////////////////////////////////////////////////////////////////
-		System.out.println("\n LISTA DE SETORES CADASTRADOS:\n");
-		//-------------------------------------------------------------------//
-		setores = setor.findAll();
-		for(Setor sts : setores) {
-			System.out.println(sts);
-		}
 		///////////////////////////////////////////////////////////////////////
 		do {
-			System.out.println("DESEJA EXCLUIR ALGUM SETOR:(Y/N):");
+			System.out.print("\nDESEJA EXCLUIR ALGUM SETOR:(Y/N): ");
 			resposta = Character.toUpperCase(sc.next().charAt(0));
 			if(resposta == 'Y') {
-				System.out.println("DIGITE O CÓDIGO DO SETOR:");
+				System.out.print("DIGITE O CÓDIGO DO SETOR: ");
 				Long codeDelete = sc.nextLong();
-				setor.deleteByObject(setor.findByCode(codeDelete));
+				sector = setor.findByCode(codeDelete);
+				setor.deleteByObject(sector);
 			}
 		}while(resposta != 'Y' && resposta != 'N');
 		///////////////////////////////////////////////////////////////////////
-		System.out.println("\n LISTA DE SETORES CADASTRADOS:\n");
+		System.out.println("\nLISTA DE SETORES CADASTRADOS:");
 		//-------------------------------------------------------------------//
 		for(Setor sts : setores = setor.findAll()) {
 			System.out.println(sts);

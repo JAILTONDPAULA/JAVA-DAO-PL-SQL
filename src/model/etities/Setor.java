@@ -2,7 +2,7 @@ package model.etities;
 
 import java.util.Objects;
 
-public class Setor {
+public class Setor implements Comparable<Setor> {
 	private long   codigo;
 	private String setor;
 	private Setor  superior = null;
@@ -60,6 +60,11 @@ public class Setor {
 	@Override
 	public String toString() {
 		return "{codigo:" + codigo + ", setor:" + setor + ", superior:" + superior + "}";
+	}
+
+	@Override
+	public int compareTo(Setor o) {
+		return this.setor.compareTo(o.getSetor());
 	}
 	
 }
